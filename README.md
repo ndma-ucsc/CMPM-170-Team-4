@@ -5,7 +5,7 @@ Unity Version: 2020.1.9f1
 
 Team Number/Name: Team 4
 
-Team Members’ Full Names (Please list all team members):
+Team Members’ Full Names:
 1. Isaiah Cisneros
 2. Victor Chung
 3. Nathan Huynh
