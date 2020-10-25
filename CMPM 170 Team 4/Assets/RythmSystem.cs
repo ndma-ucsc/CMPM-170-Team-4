@@ -10,7 +10,7 @@ public class RythmSystem : MonoBehaviour {
 	float dsptimesong;
 
 	public float bpm;
-	List<float> notes;
+	private List<float> notes  = new List<float>();
 	bool recording = false;
 	public int init_time = 8;
 	public int end_time = 16;
@@ -27,7 +27,7 @@ public class RythmSystem : MonoBehaviour {
         songPosition = (float) (AudioSettings.dspTime - dsptimesong);
         songPosInBeats = songPosition / secPerBeat;
         
-        if (songPosInBeats == 8) {
+        if (!recording && songPosInBeats <= 16 && songPosInBeats >= 8) {
         	recording = true;
         }
         if (recording == true) {
@@ -35,7 +35,7 @@ public class RythmSystem : MonoBehaviour {
         		notes.Add(songPosInBeats - init_time);
         	}
         }
-        if (songPosInBeats == 16) {
+        if (recording && songPosInBeats >= 16) {
         	recording = false;
         }
     }
