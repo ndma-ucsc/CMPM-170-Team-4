@@ -8,9 +8,8 @@ Team Number/Name: Team 4
 Team Members’ Full Names:
 1. Nathan Huynh
 2. Nathan Ma
-3. Joel Mariscal
-4. Elijah Miller
-5. Alec Wolf
+3. Elijah Miller
+4. Alec Wolf
 
 Team Mentor: Abdul Jawad
 
