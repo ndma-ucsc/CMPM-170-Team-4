@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 // Reference: https://www.gamasutra.com/blogs/YuChao/20170316/293814/Music_Syncing_in_Rhythm_Games.php
@@ -12,14 +13,19 @@ public class RythmSystem : MonoBehaviour {
 	public float bpm;
 	private List<float> notes  = new List<float>();
 	bool recording = false;
+
 	public int init_time = 8;
 	public int end_time = 16;
+
+    public GameObject sprite;
+    
 
     // Start is called before the first frame update
     void Start() {
         secPerBeat = 60f / bpm;
         dsptimesong = (float) AudioSettings.dspTime;
         GetComponent<AudioSource>().Play();
+        sprite.SetActive(false);
     }
 
     // Update is called once per frame
@@ -29,6 +35,7 @@ public class RythmSystem : MonoBehaviour {
         
         if (!recording && songPosInBeats <= 16 && songPosInBeats >= 8) {
         	recording = true;
+            sprite.SetActive(true);
         }
         if (recording == true) {
         	if (Input.GetKeyDown(KeyCode.UpArrow)) {
@@ -37,6 +44,7 @@ public class RythmSystem : MonoBehaviour {
         }
         if (recording && songPosInBeats >= 16) {
         	recording = false;
+            sprite.SetActive(false);
         }
     }
 }

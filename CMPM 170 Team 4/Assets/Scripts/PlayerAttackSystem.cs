@@ -13,7 +13,7 @@ public class PlayerAttackSystem : MonoBehaviour
         if(Input.GetKeyDown("space"))
         {
              Projectile attack = Instantiate(attackType1) as Projectile;
-             attack.init(transform.position, opponent.transform.position, 25);
+             attack.init(transform.position, opponent.transform.position, 50);
              attack.transform.parent = this.transform;
         }
     }
