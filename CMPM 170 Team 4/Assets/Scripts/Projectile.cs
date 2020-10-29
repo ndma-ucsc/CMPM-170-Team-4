@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    /*** Parameters ***/
     private Vector3 direction;
-    protected float speed;
+    private float speed;
     private Rigidbody rig;
 
     void Awake()
@@ -13,6 +14,7 @@ public class Projectile : MonoBehaviour
         rig = GetComponent<Rigidbody>();
     }
 
+    // Initializes start parameters based on origin(spawn location), target location, and movement speed
     public void init(Vector3 origin, Vector3 target, float movementSpeed)
     {
         direction = Vector3.Normalize(target - origin);
@@ -27,6 +29,7 @@ public class Projectile : MonoBehaviour
         rig.MovePosition(transform.position + movement);
     }
 
+    // For collision with any object, check if target or not
     void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject == transform.parent.GetComponent<PlayerAttackSystem>().opponent) // Hit target

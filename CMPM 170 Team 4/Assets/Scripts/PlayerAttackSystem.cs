@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PlayerAttackSystem : MonoBehaviour
 {
+    /*** Player references ***/
     public int playerNumber;
     public GameObject opponent;
+    
+    /*** Attack references ***/
     public Projectile attackType1;
 
-    public bool attacking;
-    private List<float> result;
+    /*** Attack parameters ***/
+    bool attacking; // If player is currently attacking (sending out projectiles, not recording)
+    private List<float> result; // Copy of previous recorded notes for assigned player
 
     void Awake()
     {
@@ -30,16 +34,17 @@ public class PlayerAttackSystem : MonoBehaviour
 
     void Update()
     {
-        // temp test using e for immediate attack spawn
-        if(Input.GetKeyDown("space"))
-        {
-             Projectile attack = Instantiate(attackType1) as Projectile;
-             attack.init(transform.position, opponent.transform.position, 50);
-             attack.transform.parent = this.transform;
-        }
+        // temp test using space for immediate attack spawn
+        // if(Input.GetKeyDown("space"))
+        // {
+        //      Projectile attack = Instantiate(attackType1) as Projectile;
+        //      attack.init(transform.position, opponent.transform.position, 50);
+        //      attack.transform.parent = this.transform;
+        // }
 
         if(attacking)
         {
+            // If passed time of earliest note, send out attack and pop note from list
             if(result.Count > 0 && result[0] < RythmSystem.instance.songPosInBeats)
             {
                 Projectile attack = Instantiate(attackType1) as Projectile;
@@ -47,17 +52,18 @@ public class PlayerAttackSystem : MonoBehaviour
                 attack.transform.parent = this.transform;
                 result.RemoveAt(0);
             }
-            else if(result.Count == 0)
+            else if(result.Count == 0) // All notes played
             {
                 attacking = false;
             }
         }
     }
 
+    // Callback for start deploy listener, called when recording ended.
     void Attack()
     {
         Debug.Log("Attack");
-        attacking = true;
-        result = RythmSystem.instance.getResult();
+        attacking = true; // Begin attacking logic
+        result = RythmSystem.instance.getResult(); // Save copy of recorded notes
     }
 }
