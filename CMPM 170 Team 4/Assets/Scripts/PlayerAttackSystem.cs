@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerAttackSystem : MonoBehaviour
 {
     /*** Player references ***/
-    public int playerNumber;
-    public GameObject opponent;
+    public GameObject player; // Player whose recording is used
+    public GameObject opponent; // Object to fire attacks at
     
     /*** Attack references ***/
-    public Projectile attackType1;
+    public Projectile attackType1; // Prefab reference for spawning
 
     /*** Attack parameters ***/
     bool attacking; // If player is currently attacking (sending out projectiles, not recording)
@@ -22,13 +22,17 @@ public class PlayerAttackSystem : MonoBehaviour
 
     void Start()
     {
-        if(playerNumber == 1)
+        if(player.name == "Player 1")
         {
             RythmSystem.instance.p1StartDeploy.AddListener(this.Attack);
         }
-        else
+        else if (player.name == "Player 2")
         {
             RythmSystem.instance.p2StartDeploy.AddListener(this.Attack);
+        }
+        else
+        {
+            Debug.Log("No player assigned to player attack system");
         }
     }
 
