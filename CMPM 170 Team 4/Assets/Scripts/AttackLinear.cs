@@ -17,13 +17,7 @@ public class AttackLinear : Attack
         attack.init(this.transform.position, endTarget.transform.position, 50);
         attack.transform.parent = this.transform;
 
-        // Setup projectile listen for collision
+        // Setup projectile listen for collision, called when object collides
         attack.hit.AddListener(removeProjectile);
-    }
-
-    // Removes all null elements of list
-    private void removeProjectile(Projectile obj)
-    {
-        projectiles.Remove(obj);
     }
 }

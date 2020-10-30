@@ -10,6 +10,7 @@ public class PlayerAttackSystem : MonoBehaviour
     
     /*** Attack references ***/
     public Attack attackType1; // Prefab of attack 1
+    public Attack attackType2; // Prefab of attack 2
 
     /*** Projectile references ***/
     public Projectile linearProjectile; // Prefab of linear movement projectile
