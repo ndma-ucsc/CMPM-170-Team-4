@@ -13,7 +13,7 @@ public class PlayerAttackSystem : MonoBehaviour
 
     /*** Attack parameters ***/
     bool attacking; // If player is currently attacking (sending out projectiles, not recording)
-    private List<float> result; // Copy of previous recorded notes for assigned player
+    private List<(float,int)> result; // Copy of previous recorded notes for assigned player
 
     void Awake()
     {
@@ -49,7 +49,7 @@ public class PlayerAttackSystem : MonoBehaviour
         if(attacking)
         {
             // If passed time of earliest note, send out attack and pop note from list
-            if(result.Count > 0 && result[0] < RythmSystem.instance.songPosInBeats)
+            if(result.Count > 0 && result[0].Item1 < RythmSystem.instance.songPosInBeats)
             {
                 Projectile attack = Instantiate(attackType1) as Projectile;
                 attack.init(transform.position, opponent.transform.position, 50);

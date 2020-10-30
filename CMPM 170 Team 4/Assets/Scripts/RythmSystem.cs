@@ -17,7 +17,7 @@ public class RythmSystem : MonoBehaviour {
     private int lastBeat;
 
     /*** Recording parameters ***/
-    private List<float> notes  = new List<float>();
+    private List<(float,int)> notes  = new List<(float,int)>();
     bool recording = false;
 
 	public int init_time = 8;
@@ -60,34 +60,43 @@ public class RythmSystem : MonoBehaviour {
             beat.Invoke();
         }
         
-        // Test for time to start recording, if not already recording
-        if (!recording && songPosInBeats <= 16 && songPosInBeats >= 8) {
+        // Test for start/stop recording
+        if (!recording && lastBeat == 8) {
         	recording = true;
             p1StartRecord.Invoke();
             sprite.SetActive(true);
         }
-        // Record input
-        if (recording == true) {
-        	if (Input.GetKeyDown(KeyCode.UpArrow)) {
-        		notes.Add(songPosInBeats - init_time);
-        	}
-        }
-        // Stop recording
-        if (recording && songPosInBeats >= 16) {
+        else if (recording && lastBeat == 16) {
         	recording = false;
             p1StartDeploy.Invoke();
             sprite.SetActive(false);
         }
+
+        // Record input
+        if (recording == true) {
+        	if (Input.GetKeyDown(KeyCode.Z)) {
+        		notes.Add((songPosInBeats - init_time,1));
+        	}
+            if (Input.GetKeyDown(KeyCode.X)) {
+        		notes.Add((songPosInBeats - init_time,2));
+        	}
+            if (Input.GetKeyDown(KeyCode.C)) {
+        		notes.Add((songPosInBeats - init_time,3));
+        	}
+            if (Input.GetKeyDown(KeyCode.V)) {
+        		notes.Add((songPosInBeats - init_time,4));
+        	}
+        }
     }
 
     // Returns a list of all notes from current recording
-    public List<float> getResult()
+    public List<(float,int)> getResult()
     {
-        List<float> result = new List<float>(notes);
+        List<(float,int)> result = new List<(float,int)>(notes);
 
         for(int i = 0; i < result.Count; ++i)
         {
-            result[i] += end_time;
+            result[i] = (result[i].Item1 + end_time, result[i].Item2);
         }
         return result;
     }

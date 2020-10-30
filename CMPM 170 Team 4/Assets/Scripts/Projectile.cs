@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Basic energy ball called to hit target, linear movement
 public class Projectile : MonoBehaviour
 {
     /*** Parameters ***/
