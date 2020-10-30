@@ -24,7 +24,7 @@ public class RythmSystem : MonoBehaviour {
 	public int end_time = 16;
 
     /*** Events ***/
-    public UnityEvent beat = new UnityEvent();           // Event invoked each beat of the song
+    public UnityEvent<int> beat = new UnityEvent<int>(); // Event invoked each beat of the song, sending beat position
     public UnityEvent p1StartRecord  = new UnityEvent(); // Event invoked on first beat of recorded measure
     public UnityEvent p1StartDeploy = new UnityEvent();  // Event invoked on the first beat after recording ends
     public UnityEvent p2StartRecord = new UnityEvent();
@@ -57,7 +57,7 @@ public class RythmSystem : MonoBehaviour {
         if (songPosInBeats >= lastBeat + 1)
         {
             lastBeat++;
-            beat.Invoke();
+            beat.Invoke(lastBeat);
         }
         
         // Test for start/stop recording
