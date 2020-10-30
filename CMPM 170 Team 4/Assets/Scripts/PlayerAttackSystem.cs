@@ -9,7 +9,10 @@ public class PlayerAttackSystem : MonoBehaviour
     public GameObject opponent; // Object to fire attacks at
     
     /*** Attack references ***/
-    public Projectile attackType1; // Prefab reference for spawning
+    public Attack attackType1; // Prefab of attack 1
+
+    /*** Projectile references ***/
+    public Projectile linearProjectile; // Prefab of linear movement projectile
 
     /*** Attack parameters ***/
     bool attacking; // If player is currently attacking (sending out projectiles, not recording)
@@ -42,7 +45,7 @@ public class PlayerAttackSystem : MonoBehaviour
         // if(Input.GetKeyDown("space"))
         // {
         //      Projectile attack = Instantiate(attackType1) as Projectile;
-        //      attack.init(transform.position, opponent.transform.position, 50);
+        //      attack.init(opponent.transform.position, 50);
         //      attack.transform.parent = this.transform;
         // }
 
@@ -51,8 +54,9 @@ public class PlayerAttackSystem : MonoBehaviour
             // If passed time of earliest note, send out attack and pop note from list
             if(result.Count > 0 && result[0].Item1 < RythmSystem.instance.songPosInBeats)
             {
-                Projectile attack = Instantiate(attackType1) as Projectile;
-                attack.init(transform.position, opponent.transform.position, 50);
+                Attack attack = Instantiate(attackType1) as Attack;
+                attack.transform.position = this.transform.position;
+                attack.init(linearProjectile, opponent, 50);
                 attack.transform.parent = this.transform;
                 result.RemoveAt(0);
             }

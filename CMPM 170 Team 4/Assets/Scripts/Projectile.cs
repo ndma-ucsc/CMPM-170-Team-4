@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 // Basic energy ball called to hit target, linear movement
 public class Projectile : MonoBehaviour
@@ -9,6 +10,9 @@ public class Projectile : MonoBehaviour
     private Vector3 direction;
     private float speed;
     private Rigidbody rig;
+
+    /*** Events ***/
+    public UnityEvent<Projectile> hit = new UnityEvent<Projectile>();
 
     void Awake()
     {
@@ -33,7 +37,7 @@ public class Projectile : MonoBehaviour
     // For collision with any object, check if target or not
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject == transform.parent.GetComponent<PlayerAttackSystem>().opponent) // Hit target
+        if(collision.gameObject == transform.parent.GetComponent<Attack>().target) // Hit target
         {
             // TODO: Animation
             // TODO: Health
@@ -44,7 +48,7 @@ public class Projectile : MonoBehaviour
             // TODO: Animation
             Debug.Log("Hit obstacle/projectile");
         }
-        
+        hit.Invoke(this);
         Destroy(gameObject);
     }
 }
