@@ -14,6 +14,7 @@ public class RythmSystem : MonoBehaviour {
 	float secPerBeat;
 	float dsptimesong;
     public float bpm;
+    private int lastBeat;
 
     /*** Recording parameters ***/
     private List<float> notes  = new List<float>();
@@ -43,6 +44,7 @@ public class RythmSystem : MonoBehaviour {
         dsptimesong = (float) AudioSettings.dspTime;
         GetComponent<AudioSource>().Play();
         sprite.SetActive(false);
+        lastBeat = 0;
     }
 
     // Update is called once per frame
@@ -50,6 +52,13 @@ public class RythmSystem : MonoBehaviour {
         // Update dynamic conductor variables
         songPosition = (float) (AudioSettings.dspTime - dsptimesong);
         songPosInBeats = songPosition / secPerBeat;
+
+        // Check for beat
+        if (songPosInBeats >= lastBeat + 1)
+        {
+            lastBeat++;
+            beat.Invoke();
+        }
         
         // Test for time to start recording, if not already recording
         if (!recording && songPosInBeats <= 16 && songPosInBeats >= 8) {
