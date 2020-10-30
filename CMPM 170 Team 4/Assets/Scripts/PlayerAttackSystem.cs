@@ -55,7 +55,19 @@ public class PlayerAttackSystem : MonoBehaviour
             // If passed time of earliest note, send out attack and pop note from list
             if(result.Count > 0 && result[0].Item1 < RythmSystem.instance.songPosInBeats)
             {
-                Attack attack = Instantiate(attackType1) as Attack;
+                Attack attack;
+                if(result[0].Item2 == 1)
+                {
+                    attack = Instantiate(attackType1) as Attack;
+                }
+                else if(result[0].Item2 == 2)
+                {
+                    attack = Instantiate(attackType2) as Attack;
+                }
+                else
+                {
+                    attack = Instantiate(attackType1) as Attack;
+                }
                 attack.transform.position = this.transform.position;
                 attack.init(linearProjectile, opponent, 50);
                 attack.transform.parent = this.transform;

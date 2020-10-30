@@ -642,7 +642,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 248515776}
   opponent: {fileID: 248515776}
-  attackType1: {fileID: 2643019128871276529, guid: 7205f34f528db1f4b8fd15bb639f8a5c, type: 3}
+  attackType1: {fileID: 6338006607119701553, guid: 862c88d530c37bf4fbedc8df335b43ad, type: 3}
+  attackType2: {fileID: 3801819333539421994, guid: 7205f34f528db1f4b8fd15bb639f8a5c, type: 3}
   linearProjectile: {fileID: 6720379093295784667, guid: 40cbba708a20e30439a13ecfb022c6e9, type: 3}
 --- !u!4 &1956463590
 Transform:
@@ -719,7 +720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1731939957122200196, guid: 7eb3d89f97b7e954cac0b71357fb8eb8, type: 3}
       propertyPath: speed
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7eb3d89f97b7e954cac0b71357fb8eb8, type: 3}

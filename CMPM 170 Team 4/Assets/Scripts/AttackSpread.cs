@@ -7,7 +7,7 @@ using System;
 public class AttackSpread : Attack
 {
     private float angleRange = Mathf.PI / 2;
-    private int numProjectiles = 3;
+    private int numProjectiles = 4;
     private float projectileWidth = 1;
     private float distFromSpawn;
     private float diffAngle;
