@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 // Simple spread attack, sends set number of projectiles in fan shape toward target
-public class AttackSpread : Attack
+public class AttackSpreadLinear : Attack
 {
     private float angleRange = Mathf.PI / 2;
     private int numProjectiles = 4;
@@ -29,7 +29,7 @@ public class AttackSpread : Attack
         projectiles.Add(attack);
 
         // Initialize parameters
-        attack.init(fanStart, new Vector3(fanStart.x * 2, fanStart.y * 2, 1), 50);
+        attack.init(fanStart, fanStart, target, 50);
 
         // Assign parent
         attack.transform.parent = this.transform;
@@ -49,7 +49,7 @@ public class AttackSpread : Attack
                                            fanStart.x * Mathf.Sin(diffAngle * i) + fanStart.y * Mathf.Cos(diffAngle * i), 1);
 
             // Initialize parameters
-            attack.init(location, new Vector3(location.x * 2, location.y * 2, 1), 50);
+            attack.init(location, location, target, 50);
 
             // Assign parent
             attack.transform.parent = this.transform;

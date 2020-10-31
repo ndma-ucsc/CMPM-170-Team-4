@@ -644,7 +644,7 @@ MonoBehaviour:
   opponent: {fileID: 248515776}
   attackType1: {fileID: 6338006607119701553, guid: 862c88d530c37bf4fbedc8df335b43ad, type: 3}
   attackType2: {fileID: 3801819333539421994, guid: 7205f34f528db1f4b8fd15bb639f8a5c, type: 3}
-  linearProjectile: {fileID: 6720379093295784667, guid: 40cbba708a20e30439a13ecfb022c6e9, type: 3}
+  linearProjectile: {fileID: 205758578037842350, guid: c9b0ed71a487e6149b6eb1a37225cdea, type: 3}
 --- !u!4 &1956463590
 Transform:
   m_ObjectHideFlags: 0

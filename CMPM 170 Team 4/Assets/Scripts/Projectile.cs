@@ -7,9 +7,10 @@ using UnityEngine.Events;
 public class Projectile : MonoBehaviour
 {
     /*** Parameters ***/
-    private Vector3 direction;
-    private float speed;
-    private Rigidbody rig;
+    protected GameObject target;
+    protected Vector3 direction;
+    protected float speed;
+    protected Rigidbody rig;
 
     /*** Events ***/
     public UnityEvent<Projectile> hit = new UnityEvent<Projectile>();
@@ -20,18 +21,12 @@ public class Projectile : MonoBehaviour
     }
 
     // Initializes start parameters based on origin(spawn location), target location, and movement speed
-    public void init(Vector3 origin, Vector3 target, float movementSpeed)
+    public virtual void init(Vector3 origin, Vector3 dir, GameObject targetObj, float movementSpeed)
     {
-        direction = Vector3.Normalize(target - origin);
+        target = targetObj;
+        direction = Vector3.Normalize(dir);
         rig.transform.position = origin + direction * 1.1f;
         speed = movementSpeed;
-    }
-
-    void Update()
-    {
-        Vector3 movement = direction * speed * Time.deltaTime;
-
-        rig.MovePosition(transform.position + movement);
     }
 
     // For collision with any object, check if target or not
