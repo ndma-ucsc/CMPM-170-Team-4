@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Simple linear projectile, moves at constant speed in constant direction toward target
 public class ProjectileLinear : Projectile
 {
     void Update()

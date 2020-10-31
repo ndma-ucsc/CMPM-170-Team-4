@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-// Basic energy ball called to hit target, linear movement
+// Basic projectile class for attack to spawn
 public class Projectile : MonoBehaviour
 {
     /*** Parameters ***/
@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
     }
 
     // Initializes start parameters based on origin(spawn location), target location, and movement speed
-    public virtual void init(Vector3 origin, Vector3 dir, GameObject targetObj, float movementSpeed)
+    public void init(Vector3 origin, Vector3 dir, GameObject targetObj, float movementSpeed)
     {
         target = targetObj;
         direction = Vector3.Normalize(dir);
