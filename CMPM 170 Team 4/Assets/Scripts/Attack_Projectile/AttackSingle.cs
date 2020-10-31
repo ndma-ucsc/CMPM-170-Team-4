@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Simple linear attack, spawns one projectile that travels linearly toward target's position at spawn time
-public class AttackSingleLinear : Attack
+// Simple attack, spawns one projectile
+public class AttackSingle : Attack
 {
-    public override void init(Projectile projectileType, GameObject endTarget, float movementSpeed)
+    public override void init(GameObject endTarget, float movementSpeed)
     {
         // Basic parameters
         speed = movementSpeed;

@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class Attack : MonoBehaviour
 {
     /*** Parameters ***/
+    public Projectile projectileType;
     protected float speed;
     public GameObject target;
     protected List<Projectile> projectiles = new List<Projectile>();
@@ -20,7 +21,7 @@ public abstract class Attack : MonoBehaviour
     }
 
     // Initializes start parameters based on target location, and movement speed
-    public abstract void init(Projectile projectileType, GameObject endTarget, float movementSpeed);
+    public abstract void init(GameObject endTarget, float movementSpeed);
 
     // Removes projectile from list
     protected void removeProjectile(Projectile obj)

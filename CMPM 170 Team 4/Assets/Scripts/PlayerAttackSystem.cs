@@ -14,6 +14,7 @@ public class PlayerAttackSystem : MonoBehaviour
 
     /*** Projectile references ***/
     public Projectile linearProjectile; // Prefab of linear movement projectile
+    public Projectile trackingProjectile; // Prefab of tracking movement projectile
 
     /*** Attack parameters ***/
     bool attacking; // If player is currently attacking (sending out projectiles, not recording)
@@ -69,7 +70,7 @@ public class PlayerAttackSystem : MonoBehaviour
                     attack = Instantiate(attackType1) as Attack;
                 }
                 attack.transform.position = this.transform.position;
-                attack.init(linearProjectile, opponent, 50);
+                attack.init(opponent, 50);
                 attack.transform.parent = this.transform;
                 result.RemoveAt(0);
             }

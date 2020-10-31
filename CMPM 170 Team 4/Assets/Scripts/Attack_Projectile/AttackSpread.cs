@@ -4,14 +4,14 @@ using UnityEngine;
 using System;
 
 // Simple spread attack, sends set number of projectiles in fan shape toward target
-public class AttackSpreadLinear : Attack
+public class AttackSpread : Attack
 {
     private float angleRange = Mathf.PI / 2;
     private int numProjectiles = 4;
     private float projectileWidth = 1;
     private float distFromSpawn;
     private float diffAngle;
-    public override void init(Projectile projectileType, GameObject endTarget, float movementSpeed)
+    public override void init(GameObject endTarget, float movementSpeed)
     {
         // Basic parameters
         speed = movementSpeed;
