@@ -9,11 +9,18 @@ public class PlayerAttackSystem : MonoBehaviour
     public GameObject opponent; // Object to fire attacks at
     
     /*** Attack references ***/
-    public Projectile attackType1; // Prefab reference for spawning
+    public Attack attackType1; // Prefab of attack 1
+    public Attack attackType2; // Prefab of attack 2
+    public Attack attackType3; // Prefab of attack 3
+    public Attack attackType4; // Prefab of attack 4
+
+    /*** Projectile references ***/
+    public Projectile linearProjectile; // Prefab of linear movement projectile
+    public Projectile trackingProjectile; // Prefab of tracking movement projectile
 
     /*** Attack parameters ***/
     bool attacking; // If player is currently attacking (sending out projectiles, not recording)
-    private List<float> result; // Copy of previous recorded notes for assigned player
+    private List<(float,int)> result; // Copy of previous recorded notes for assigned player
 
     void Awake()
     {
@@ -42,17 +49,34 @@ public class PlayerAttackSystem : MonoBehaviour
         // if(Input.GetKeyDown("space"))
         // {
         //      Projectile attack = Instantiate(attackType1) as Projectile;
-        //      attack.init(transform.position, opponent.transform.position, 50);
+        //      attack.init(opponent.transform.position, 50);
         //      attack.transform.parent = this.transform;
         // }
 
         if(attacking)
         {
             // If passed time of earliest note, send out attack and pop note from list
-            if(result.Count > 0 && result[0] < RythmSystem.instance.songPosInBeats)
+            if(result.Count > 0 && result[0].Item1 < RythmSystem.instance.songPosInBeats)
             {
-                Projectile attack = Instantiate(attackType1) as Projectile;
-                attack.init(transform.position, opponent.transform.position, 50);
+                Attack attack;
+                if(result[0].Item2 == 1)
+                {
+                    attack = Instantiate(attackType1) as Attack;
+                }
+                else if(result[0].Item2 == 2)
+                {
+                    attack = Instantiate(attackType2) as Attack;
+                }
+                else if(result[0].Item2 == 3)
+                {
+                    attack = Instantiate(attackType3) as Attack;
+                }
+                else
+                {
+                    attack = Instantiate(attackType4) as Attack;
+                }
+                attack.transform.position = this.transform.position;
+                attack.init(opponent, 50);
                 attack.transform.parent = this.transform;
                 result.RemoveAt(0);
             }
@@ -66,7 +90,6 @@ public class PlayerAttackSystem : MonoBehaviour
     // Callback for start deploy listener, called when recording ended.
     void Attack()
     {
-        Debug.Log("Attack");
         attacking = true; // Begin attacking logic
         result = RythmSystem.instance.getResult(); // Save copy of recorded notes
     }
