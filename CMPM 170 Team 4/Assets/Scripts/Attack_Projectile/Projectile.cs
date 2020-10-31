@@ -25,6 +25,7 @@ public class Projectile : MonoBehaviour
     {
         target = targetObj;
         direction = Vector3.Normalize(dir);
+        direction.z = 0;
         rig.transform.position = origin + direction * 1.1f;
         speed = movementSpeed;
     }
