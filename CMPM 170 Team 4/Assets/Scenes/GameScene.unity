@@ -644,6 +644,8 @@ MonoBehaviour:
   opponent: {fileID: 248515776}
   attackType1: {fileID: 5895024796517437102, guid: 746a15ec43fcb3e4db68e92de3a134c1, type: 3}
   attackType2: {fileID: 6568335263380207358, guid: 7c2f6901bbc7a0b419f4dbdc86e73919, type: 3}
+  attackType3: {fileID: 7179196508868690330, guid: 0e2d361f2724e46479b288ae27acddbb, type: 3}
+  attackType4: {fileID: 3712578696335638299, guid: 0b849b28d7b0d134d94991f5b2521e3f, type: 3}
   linearProjectile: {fileID: 205758578037842350, guid: c9b0ed71a487e6149b6eb1a37225cdea, type: 3}
   trackingProjectile: {fileID: 1411450314525297155, guid: 76cd01c94c9aecd41b4b90ee9f78c6c5, type: 3}
 --- !u!4 &1956463590
@@ -721,7 +723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1731939957122200196, guid: 7eb3d89f97b7e954cac0b71357fb8eb8, type: 3}
       propertyPath: speed
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7eb3d89f97b7e954cac0b71357fb8eb8, type: 3}

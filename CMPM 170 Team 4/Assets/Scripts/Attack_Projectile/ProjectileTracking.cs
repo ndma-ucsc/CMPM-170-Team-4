@@ -5,7 +5,7 @@ using UnityEngine;
 // Tracking projectile, curves toward target at constant speed and with restrained turn force
 public class ProjectileTracking : Projectile
 {
-    private float maxForce = 1f;
+    private float maxForce = 0.5f;
     void Update()
     {
         Vector3 desiredDirection = Vector3.Normalize(target.transform.position - this.transform.position) * speed;

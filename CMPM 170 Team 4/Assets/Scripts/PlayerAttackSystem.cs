@@ -11,6 +11,8 @@ public class PlayerAttackSystem : MonoBehaviour
     /*** Attack references ***/
     public Attack attackType1; // Prefab of attack 1
     public Attack attackType2; // Prefab of attack 2
+    public Attack attackType3; // Prefab of attack 3
+    public Attack attackType4; // Prefab of attack 4
 
     /*** Projectile references ***/
     public Projectile linearProjectile; // Prefab of linear movement projectile
@@ -65,9 +67,13 @@ public class PlayerAttackSystem : MonoBehaviour
                 {
                     attack = Instantiate(attackType2) as Attack;
                 }
+                else if(result[0].Item2 == 3)
+                {
+                    attack = Instantiate(attackType3) as Attack;
+                }
                 else
                 {
-                    attack = Instantiate(attackType1) as Attack;
+                    attack = Instantiate(attackType4) as Attack;
                 }
                 attack.transform.position = this.transform.position;
                 attack.init(opponent, 50);
