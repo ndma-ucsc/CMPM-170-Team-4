@@ -6,7 +6,7 @@ using UnityEngine;
 // Reference: https://www.gamasutra.com/blogs/YuChao/20170316/293814/Music_Syncing_in_Rhythm_Games.php
 public class RythmSystem : MonoBehaviour {
 	float songPosition;
-	float songPosInBeats;
+	public float songPosInBeats;
 	float secPerBeat;
 	float dsptimesong;
 

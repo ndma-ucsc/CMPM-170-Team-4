@@ -29,11 +29,17 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject == transform.parent.GetComponent<PlayerAttackSystem>().opponent) // Hit target
+        if(collision.gameObject == transform.parent.GetComponent<PlayerAttackSystem>().opponent && transform.parent.GetComponent<PlayerAttackSystem>().opponent.GetComponent<PlayerController>().parry == false) // Hit target
         {
             // TODO: Animation
             // TODO: Health
             Debug.Log("Hit target");
+        }
+        if (collision.gameObject == transform.parent.GetComponent<PlayerAttackSystem>().opponent) // Hit target
+        {
+            // TODO: Animation
+            // TODO: Health
+            Debug.Log("Parried");
         }
         else // Hit obstacle or projectile
         {
