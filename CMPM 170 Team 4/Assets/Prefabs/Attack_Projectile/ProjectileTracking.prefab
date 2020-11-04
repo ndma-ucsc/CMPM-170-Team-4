@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 932248875360513893}
   - component: {fileID: 192412728419683641}
   - component: {fileID: 1411450314525297155}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ProjectileTracking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,4 +128,3 @@ MonoBehaviour:
   hit:
     m_PersistentCalls:
       m_Calls: []
-  maxForce: 0.01
