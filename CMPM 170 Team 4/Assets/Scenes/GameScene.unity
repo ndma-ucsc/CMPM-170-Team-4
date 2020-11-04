@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &10782911 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 178543705266825939, guid: 7eb3d89f97b7e954cac0b71357fb8eb8, type: 3}
+  m_PrefabInstance: {fileID: 928131736}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &230214689
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +162,10 @@ MonoBehaviour:
   bpm: 120
   init_time: 8
   end_time: 16
-  beat:
+  note4:
+    m_PersistentCalls:
+      m_Calls: []
+  note16:
     m_PersistentCalls:
       m_Calls: []
   p1StartRecord:
@@ -615,7 +623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 248515776}
-  opponent: {fileID: 248515776}
+  opponent: {fileID: 10782911}
   attackType1: {fileID: 5895024796517437102, guid: 746a15ec43fcb3e4db68e92de3a134c1, type: 3}
   attackType2: {fileID: 6568335263380207358, guid: 7c2f6901bbc7a0b419f4dbdc86e73919, type: 3}
   attackType3: {fileID: 7179196508868690330, guid: 0e2d361f2724e46479b288ae27acddbb, type: 3}

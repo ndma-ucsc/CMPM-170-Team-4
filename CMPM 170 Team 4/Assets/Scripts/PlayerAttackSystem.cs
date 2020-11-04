@@ -52,39 +52,41 @@ public class PlayerAttackSystem : MonoBehaviour
         //      attack.init(opponent.transform.position, 50);
         //      attack.transform.parent = this.transform;
         // }
+    }
 
-        if(attacking)
+    void NotePlayCheck(int note)
+    {
+        if(result.Count == 0) // All notes played
         {
-            // If passed time of earliest note, send out attack and pop note from list
-            if(result.Count > 0 && result[0].Item1 < RythmSystem.instance.songPosInBeats)
-            {
-                Attack attack;
-                if(result[0].Item2 == 1)
-                {
-                    attack = Instantiate(attackType1) as Attack;
-                }
-                else if(result[0].Item2 == 2)
-                {
-                    attack = Instantiate(attackType2) as Attack;
-                }
-                else if(result[0].Item2 == 3)
-                {
-                    attack = Instantiate(attackType3) as Attack;
-                }
-                else
-                {
-                    attack = Instantiate(attackType4) as Attack;
-                }
-                attack.transform.position = this.transform.position;
-                attack.init(opponent, 50);
-                attack.transform.parent = this.transform;
-                result.RemoveAt(0);
-            }
-            else if(result.Count == 0) // All notes played
-            {
-                attacking = false;
-            }
+            attacking = false;
+            RythmSystem.instance.note16.RemoveListener(this.NotePlayCheck);
+            return;
         }
+        else if(note != result[0].Item1) // if no note to play
+        {
+            return;
+        }
+        Attack attack;
+        if(result[0].Item2 == 1)
+        {
+            attack = Instantiate(attackType1) as Attack;
+        }
+        else if(result[0].Item2 == 2)
+        {
+            attack = Instantiate(attackType2) as Attack;
+        }
+        else if(result[0].Item2 == 3)
+        {
+            attack = Instantiate(attackType3) as Attack;
+        }
+        else
+        {
+            attack = Instantiate(attackType4) as Attack;
+        }
+        attack.transform.position = this.transform.position;
+        attack.init(opponent, 50);
+        attack.transform.parent = this.transform;
+        result.RemoveAt(0);
     }
 
     // Callback for start deploy listener, called when recording ended.
@@ -92,5 +94,6 @@ public class PlayerAttackSystem : MonoBehaviour
     {
         attacking = true; // Begin attacking logic
         result = RythmSystem.instance.getResult(); // Save copy of recorded notes
+        RythmSystem.instance.note16.AddListener(this.NotePlayCheck);
     }
 }
