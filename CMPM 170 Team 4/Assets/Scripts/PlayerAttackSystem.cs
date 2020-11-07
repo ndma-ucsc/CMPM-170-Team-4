@@ -56,6 +56,7 @@ public class PlayerAttackSystem : MonoBehaviour
 
     void NotePlayCheck(int note)
     {
+        // Debug.Log("note: " + note + "\nnext played: " + result[0].Item1);
         if(result.Count == 0) // All notes played
         {
             attacking = false;
@@ -66,6 +67,7 @@ public class PlayerAttackSystem : MonoBehaviour
         {
             return;
         }
+
         Attack attack;
         if(result[0].Item2 == 1)
         {
@@ -87,6 +89,7 @@ public class PlayerAttackSystem : MonoBehaviour
         attack.init(opponent, 50);
         attack.transform.parent = this.transform;
         result.RemoveAt(0);
+        // Debug.Log(result.Count);
     }
 
     // Callback for start deploy listener, called when recording ended.
