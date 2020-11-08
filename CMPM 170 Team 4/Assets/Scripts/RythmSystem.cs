@@ -14,7 +14,7 @@ public class RythmSystem : MonoBehaviour {
 	float secPerBeat;
 	float dsptimesong;
     public float bpm;
-    private int lastBeat;
+    private int last16th;
 
     /*** Recording parameters ***/
     private List<(float,int)> notes  = new List<(float,int)>();
@@ -24,9 +24,10 @@ public class RythmSystem : MonoBehaviour {
 	public int end_time = 16;
 
     /*** Events ***/
-    public UnityEvent<int> beat = new UnityEvent<int>(); // Event invoked each beat of the song, sending beat position
-    public UnityEvent p1StartRecord  = new UnityEvent(); // Event invoked on first beat of recorded measure
-    public UnityEvent p1StartDeploy = new UnityEvent();  // Event invoked on the first beat after recording ends
+    public UnityEvent<int> note4 = new UnityEvent<int>();  // Event invoked each 4th note beat of the song, sending 4th note position
+    public UnityEvent<int> note16 = new UnityEvent<int>(); // Event invoked each 16th note beat of the song, sending 16th note position
+    public UnityEvent p1StartRecord  = new UnityEvent();   // Event invoked on first beat of recorded measure
+    public UnityEvent p1StartDeploy = new UnityEvent();    // Event invoked on the first beat after recording ends
     public UnityEvent p2StartRecord = new UnityEvent();
     public UnityEvent p2StartDeploy = new UnityEvent();
 
@@ -44,7 +45,7 @@ public class RythmSystem : MonoBehaviour {
         dsptimesong = (float) AudioSettings.dspTime;
         GetComponent<AudioSource>().Play();
         sprite.SetActive(false);
-        lastBeat = 0;
+        last16th = 0;
     }
 
     // Update is called once per frame
@@ -53,20 +54,28 @@ public class RythmSystem : MonoBehaviour {
         songPosition = (float) (AudioSettings.dspTime - dsptimesong);
         songPosInBeats = songPosition / secPerBeat;
 
-        // Check for beat
-        if (songPosInBeats >= lastBeat + 1)
+        // Check for 16th note
+        if (songPosInBeats * 4 >= last16th + 1)
         {
-            lastBeat++;
-            beat.Invoke(lastBeat);
+            note16.Invoke(++last16th);
+            if (last16th % 4 == 0)
+            {
+                note4.Invoke(last16th / 4);
+                // Debug.Log(last16th / 4);
+            }
+            // else 
+            // {
+            //     Debug.Log(last16th);
+            // }
         }
         
         // Test for start/stop recording
-        if (!recording && lastBeat == 8) {
+        if (!recording && last16th / 4 == 8) {
         	recording = true;
             p1StartRecord.Invoke();
             sprite.SetActive(true);
         }
-        else if (recording && lastBeat == 16) {
+        else if (recording && last16th / 4 == 16) {
         	recording = false;
             p1StartDeploy.Invoke();
             sprite.SetActive(false);
@@ -74,17 +83,30 @@ public class RythmSystem : MonoBehaviour {
 
         // Record input
         if (recording == true) {
+            int playedNote16 = (int)Mathf.Floor(songPosInBeats * 4 + 0.5f);
         	if (Input.GetKeyDown(KeyCode.Z)) {
-        		notes.Add((songPosInBeats - init_time,1));
+                if(notes.Count == 0 || notes[notes.Count - 1].Item1 != playedNote16 + (end_time - init_time) * 4)
+                {
+        		    notes.Add((playedNote16 + (end_time - init_time) * 4,1));
+                }
         	}
-            if (Input.GetKeyDown(KeyCode.X)) {
-        		notes.Add((songPosInBeats - init_time,2));
+            else if (Input.GetKeyDown(KeyCode.X)) {
+                if(notes.Count == 0 || notes[notes.Count - 1].Item1 != playedNote16 + (end_time - init_time) * 4)
+                {
+        		    notes.Add((playedNote16 + (end_time - init_time) * 4,2));
+                }
         	}
-            if (Input.GetKeyDown(KeyCode.C)) {
-        		notes.Add((songPosInBeats - init_time,3));
+            else if (Input.GetKeyDown(KeyCode.C)) {
+                if(notes.Count == 0 || notes[notes.Count - 1].Item1 != playedNote16 + (end_time - init_time) * 4)
+                {
+        		    notes.Add((playedNote16 + (end_time - init_time) * 4,3));
+                }
         	}
-            if (Input.GetKeyDown(KeyCode.V)) {
-        		notes.Add((songPosInBeats - init_time,4));
+            else if (Input.GetKeyDown(KeyCode.V)) {
+                if(notes.Count == 0 || notes[notes.Count - 1].Item1 != playedNote16 + (end_time - init_time) * 4)
+                {
+        		    notes.Add((playedNote16 + (end_time - init_time) * 4,4));
+                }
         	}
         }
     }
@@ -92,12 +114,7 @@ public class RythmSystem : MonoBehaviour {
     // Returns a list of all notes from current recording
     public List<(float,int)> getResult()
     {
-        List<(float,int)> result = new List<(float,int)>(notes);
-
-        for(int i = 0; i < result.Count; ++i)
-        {
-            result[i] = (result[i].Item1 + end_time, result[i].Item2);
-        }
-        return result;
+        Debug.Log(notes.Count);
+        return new List<(float,int)>(notes);
     }
 }
