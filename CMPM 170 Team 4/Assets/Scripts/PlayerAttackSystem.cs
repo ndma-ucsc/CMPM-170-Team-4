@@ -72,18 +72,22 @@ public class PlayerAttackSystem : MonoBehaviour
         if(result[0].Item2 == 1)
         {
             attack = Instantiate(attackType1) as Attack;
+            // TODO: Play note 1 sound (single linear shot)
         }
         else if(result[0].Item2 == 2)
         {
             attack = Instantiate(attackType2) as Attack;
+            // TODO: Play note 2 sound (spread linear shot)
         }
         else if(result[0].Item2 == 3)
         {
             attack = Instantiate(attackType3) as Attack;
+            // TODO: Play note 3 sound (single tracking shot)
         }
         else
         {
             attack = Instantiate(attackType4) as Attack;
+            // TODO: Play note 4 sound (spread tracking shot)
         }
         attack.transform.position = this.transform.position;
         attack.init(opponent, 50);
