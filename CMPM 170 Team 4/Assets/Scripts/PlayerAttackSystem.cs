@@ -99,6 +99,7 @@ public class PlayerAttackSystem : MonoBehaviour
     // Callback for start deploy listener, called when recording ended.
     void Attack()
     {
+        Debug.Log(this.name + " attacking");
         attacking = true; // Begin attacking logic
         result = RythmSystem.instance.getResult(); // Save copy of recorded notes
         RythmSystem.instance.note16.AddListener(this.NotePlayCheck);

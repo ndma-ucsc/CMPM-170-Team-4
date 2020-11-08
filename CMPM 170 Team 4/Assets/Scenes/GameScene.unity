@@ -160,8 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songPosInBeats: 0
   bpm: 120
-  init_time: 8
-  end_time: 16
+  phaseLength: 2
   note4:
     m_PersistentCalls:
       m_Calls: []
@@ -289,7 +288,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -381,7 +380,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -593,6 +592,57 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7eb3d89f97b7e954cac0b71357fb8eb8, type: 3}
+--- !u!1 &1034319133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1034319135}
+  - component: {fileID: 1034319134}
+  m_Layer: 0
+  m_Name: Attack2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1034319134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034319133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b43d0a2ed76e54ebf870d8bad4b5c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 10782911}
+  opponent: {fileID: 248515776}
+  attackType1: {fileID: 5895024796517437102, guid: 746a15ec43fcb3e4db68e92de3a134c1, type: 3}
+  attackType2: {fileID: 6568335263380207358, guid: 7c2f6901bbc7a0b419f4dbdc86e73919, type: 3}
+  attackType3: {fileID: 7179196508868690330, guid: 0e2d361f2724e46479b288ae27acddbb, type: 3}
+  attackType4: {fileID: 3712578696335638299, guid: 0b849b28d7b0d134d94991f5b2521e3f, type: 3}
+  linearProjectile: {fileID: 205758578037842350, guid: c9b0ed71a487e6149b6eb1a37225cdea, type: 3}
+  trackingProjectile: {fileID: 1411450314525297155, guid: 76cd01c94c9aecd41b4b90ee9f78c6c5, type: 3}
+--- !u!4 &1034319135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034319133}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1956463588
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +692,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3040643408205705771
 PrefabInstance:

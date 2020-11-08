@@ -20,8 +20,9 @@ public class RythmSystem : MonoBehaviour {
     private List<(float,int)> notes  = new List<(float,int)>();
     bool recording = false;
 
-	public int init_time = 8;
-	public int end_time = 16;
+	public int phaseLength = 2; // length of recording/attacking in measures
+	private int phaseStart = 0; // beat that the current phase started on (record or attack)
+    private int activePlayer = 0; // player currently recording/attacking (0 will automatically start with player 1)
 
     /*** Events ***/
     public UnityEvent<int> note4 = new UnityEvent<int>();  // Event invoked each 4th note beat of the song, sending 4th note position
@@ -69,15 +70,38 @@ public class RythmSystem : MonoBehaviour {
             // }
         }
         
-        // Test for start/stop recording
-        if (!recording && last16th / 4 == 8) {
+        // start of recording phase
+        if (!recording && last16th == phaseStart + 16 * phaseLength) {
+            notes.Clear(); // empty previous recording
         	recording = true;
-            p1StartRecord.Invoke();
+            phaseStart = last16th;
+            if(activePlayer == 1) // switch to player 2 recording phase
+            {
+                Debug.Log("P2 Recording");
+                activePlayer = 2;
+                p2StartRecord.Invoke();
+            }
+            else // switch to player 1 recording phase
+            {
+                Debug.Log("P1 Recording");
+                activePlayer = 1;
+                p1StartRecord.Invoke();
+            }
             sprite.SetActive(true);
         }
-        else if (recording && last16th / 4 == 16) {
+        else if (recording && last16th == phaseStart + 16 * phaseLength) { // start of attack phase
         	recording = false;
-            p1StartDeploy.Invoke();
+            phaseStart = last16th;
+            if(activePlayer == 1) // switch to player 1 attack phase
+            {
+                Debug.Log("P1 Attacking");
+                p1StartDeploy.Invoke();
+            }
+            else // switch to player 2 attack phase
+            {
+                Debug.Log("P2 Attacking");
+                p2StartDeploy.Invoke();
+            }
             sprite.SetActive(false);
         }
 
@@ -85,27 +109,27 @@ public class RythmSystem : MonoBehaviour {
         if (recording == true) {
             int playedNote16 = (int)Mathf.Floor(songPosInBeats * 4 + 0.5f);
         	if (Input.GetKeyDown(KeyCode.Z)) {
-                if(notes.Count == 0 || notes[notes.Count - 1].Item1 != playedNote16 + (end_time - init_time) * 4)
+                if(notes.Count == 0 || notes[notes.Count - 1].Item1 != playedNote16 + phaseLength * 16)
                 {
-        		    notes.Add((playedNote16 + (end_time - init_time) * 4,1));
+        		    notes.Add((playedNote16 + phaseLength * 16,1));
                 }
         	}
             else if (Input.GetKeyDown(KeyCode.X)) {
-                if(notes.Count == 0 || notes[notes.Count - 1].Item1 != playedNote16 + (end_time - init_time) * 4)
+                if(notes.Count == 0 || notes[notes.Count - 1].Item1 != playedNote16 + phaseLength * 16)
                 {
-        		    notes.Add((playedNote16 + (end_time - init_time) * 4,2));
+        		    notes.Add((playedNote16 + phaseLength * 16,2));
                 }
         	}
             else if (Input.GetKeyDown(KeyCode.C)) {
-                if(notes.Count == 0 || notes[notes.Count - 1].Item1 != playedNote16 + (end_time - init_time) * 4)
+                if(notes.Count == 0 || notes[notes.Count - 1].Item1 != playedNote16 + phaseLength * 16)
                 {
-        		    notes.Add((playedNote16 + (end_time - init_time) * 4,3));
+        		    notes.Add((playedNote16 + phaseLength * 16,3));
                 }
         	}
             else if (Input.GetKeyDown(KeyCode.V)) {
-                if(notes.Count == 0 || notes[notes.Count - 1].Item1 != playedNote16 + (end_time - init_time) * 4)
+                if(notes.Count == 0 || notes[notes.Count - 1].Item1 != playedNote16 + phaseLength * 16)
                 {
-        		    notes.Add((playedNote16 + (end_time - init_time) * 4,4));
+        		    notes.Add((playedNote16 + phaseLength * 16,4));
                 }
         	}
         }
@@ -114,7 +138,7 @@ public class RythmSystem : MonoBehaviour {
     // Returns a list of all notes from current recording
     public List<(float,int)> getResult()
     {
-        Debug.Log(notes.Count);
+        // Debug.Log(notes.Count);
         return new List<(float,int)>(notes);
     }
 }
